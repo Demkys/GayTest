@@ -1,1 +1,169 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест на гея</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f2f2f2;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .question {
+            margin: 20px 0;
+        }
+        .question label {
+            font-weight: bold;
+        }
+        .question input {
+            margin-right: 10px;
+        }
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+        #result {
+            display: none;
+            text-align: center;
+        }
+        #result canvas {
+            max-width: 100%;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
 
+<header>
+    <h1>Тест на гея, лесбиянку или гетеро</h1>
+    <p>Ответь на вопросы, чтобы узнать свой результат!</p>
+</header>
+
+<div class="container">
+    <h2>Пройди тест</h2>
+    <form id="quizForm">
+        <!-- Вопросы теста -->
+        <div class="question">
+            <label>1. Как вы себя чувствуете при общении с представителями противоположного пола?</label>
+            <input type="radio" name="q1" value="0" required> Неудобно
+            <input type="radio" name="q1" value="1"> Нормально
+            <input type="radio" name="q1" value="2"> Очень комфортно
+        </div>
+        <div class="question">
+            <label>2. Какие фильмы вам нравятся больше?</label>
+            <input type="radio" name="q2" value="0" required> Романтические с девушками
+            <input type="radio" name="q2" value="1"> Универсальные, оба варианта
+            <input type="radio" name="q2" value="2"> Романтические с парнями
+        </div>
+        <!-- Добавьте еще 8 вопросов аналогично, с вариантами 0, 1, 2 -->
+
+        <button type="submit" class="submit-btn">Показать результат</button>
+    </form>
+
+    <div id="result">
+        <h2>Результат</h2>
+        <p>Ваш процент приверженности к разным ориентациям:</p>
+        <canvas id="resultChart" width="400" height="400"></canvas>
+        <p id="percentageText"></p>
+    </div>
+</div>
+
+<script>
+    document.getElementById("quizForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Чтобы форма не перезагружала страницу
+
+        // Считываем ответы
+        const formData = new FormData(event.target);
+        let scores = { gay: 0, straight: 0, bisexual: 0 };
+
+        formData.forEach((value, key) => {
+            // Каждый вопрос оценивается по шкале от 0 до 2, где 0 - более гетеро, 2 - более гей
+            switch (key) {
+                case 'q1':
+                    if (value == '2') scores.straight++; // Пример для расчета баллов
+                    break;
+                case 'q2':
+                    if (value == '0') scores.gay++; 
+                    break;
+                // Добавь остальные вопросы аналогично
+            }
+        });
+
+        // Подсчитываем результаты в процентах
+        const totalQuestions = 10;
+        const totalScore = scores.gay + scores.straight + scores.bisexual;
+        const gayPercentage = (scores.gay / totalQuestions) * 100;
+        const straightPercentage = (scores.straight / totalQuestions) * 100;
+        const bisexualPercentage = (scores.bisexual / totalQuestions) * 100;
+
+        // Показываем результат
+        document.getElementById("result").style.display = "block";
+        document.getElementById("percentageText").innerText = 
+            `Гей: ${gayPercentage.toFixed(2)}%, Лесбиянка: ${bisexualPercentage.toFixed(2)}%, Гетеро: ${straightPercentage.toFixed(2)}%`;
+
+        // Построение круговой диаграммы
+        const ctx = document.getElementById('resultChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Гей', 'Лесбиянка', 'Гетеро'],
+                datasets: [{
+                    data: [gayPercentage, bisexualPercentage, straightPercentage],
+                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                return `${tooltipItem.label}: ${tooltipItem.raw.toFixed(2)}%`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
