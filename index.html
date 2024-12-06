@@ -1,169 +1,199 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Тест на гея</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Тест на ориентацию</title>
     <style>
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
             color: #333;
             margin: 0;
             padding: 0;
         }
-        header {
-            background-color: #4CAF50;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
         .container {
             max-width: 800px;
-            margin: 20px auto;
-            background-color: white;
+            margin: 0 auto;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        h2 {
+        h1 {
             text-align: center;
-            color: #333;
+            color: #fff;
         }
         .question {
-            margin: 20px 0;
+            margin-bottom: 20px;
         }
-        .question label {
+        .question p {
+            font-size: 18px;
             font-weight: bold;
         }
-        .question input {
-            margin-right: 10px;
+        .answers {
+            margin-top: 10px;
         }
-        .submit-btn {
+        .answers label {
             display: block;
-            width: 100%;
-            padding: 10px;
-            background-color: #4CAF50;
-            color: white;
-            font-size: 16px;
+            margin: 5px 0;
+        }
+        button {
+            background-color: #ff6f61;
             border: none;
+            color: white;
+            padding: 10px 20px;
+            text-transform: uppercase;
+            font-weight: bold;
             cursor: pointer;
             border-radius: 5px;
         }
-        .submit-btn:hover {
-            background-color: #45a049;
+        button:hover {
+            background-color: #ff856e;
         }
         #result {
-            display: none;
             text-align: center;
+            margin-top: 30px;
         }
-        #result canvas {
-            max-width: 100%;
-            margin-top: 20px;
+        canvas {
+            display: block;
+            margin: 20px auto;
         }
     </style>
 </head>
 <body>
-
-<header>
-    <h1>Тест на гея, лесбиянку или гетеро</h1>
-    <p>Ответь на вопросы, чтобы узнать свой результат!</p>
-</header>
-
-<div class="container">
-    <h2>Пройди тест</h2>
-    <form id="quizForm">
-        <!-- Вопросы теста -->
-        <div class="question">
-            <label>1. Как вы себя чувствуете при общении с представителями противоположного пола?</label>
-            <input type="radio" name="q1" value="0" required> Неудобно
-            <input type="radio" name="q1" value="1"> Нормально
-            <input type="radio" name="q1" value="2"> Очень комфортно
+    <div class="container">
+        <h1>Тест на ориентацию</h1>
+        <form id="quizForm">
+            <!-- Вопросы -->
+            <div class="question">
+                <p>1. Как вы относитесь к романтическим фильмам?</p>
+                <div class="answers">
+                    <label><input type="radio" name="q1" value="gay"> Обожаю смотреть</label>
+                    <label><input type="radio" name="q1" value="neutral"> Иногда смотрю</label>
+                    <label><input type="radio" name="q1" value="hetero"> Не люблю</label>
+                </div>
+            </div>
+            <div class="question">
+                <p>2. Вдохновляют ли вас модные показы или стиль одежды?</p>
+                <div class="answers">
+                    <label><input type="radio" name="q2" value="gay"> Да, слежу за трендами</label>
+                    <label><input type="radio" name="q2" value="neutral"> Иногда</label>
+                    <label><input type="radio" name="q2" value="hetero"> Совсем нет</label>
+                </div>
+            </div>
+            <div class="question">
+                <p>3. Как вы относитесь к мужским/женским фитнес-фигурам?</p>
+                <div class="answers">
+                    <label><input type="radio" name="q3" value="gay"> Очень привлекают</label>
+                    <label><input type="radio" name="q3" value="neutral"> Нейтрально</label>
+                    <label><input type="radio" name="q3" value="hetero"> Меня интересует противоположный пол</label>
+                </div>
+            </div>
+            <div class="question">
+                <p>4. Какой тип музыки вам ближе?</p>
+                <div class="answers">
+                    <label><input type="radio" name="q4" value="gay"> Поп, танцевальная</label>
+                    <label><input type="radio" name="q4" value="neutral"> Всё подряд</label>
+                    <label><input type="radio" name="q4" value="hetero"> Рок или классика</label>
+                </div>
+            </div>
+            <div class="question">
+                <p>5. Любите ли вы участвовать в творческих проектах (искусство, дизайн)?</p>
+                <div class="answers">
+                    <label><input type="radio" name="q5" value="gay"> Да, обожаю</label>
+                    <label><input type="radio" name="q5" value="neutral"> Иногда</label>
+                    <label><input type="radio" name="q5" value="hetero"> Не мое</label>
+                </div>
+            </div>
+            <div class="question">
+                <p>6. Как вы относитесь к ярким и необычным образам?</p>
+                <div class="answers">
+                    <label><input type="radio" name="q6" value="gay"> Люблю экспериментировать</label>
+                    <label><input type="radio" name="q6" value="neutral"> Зависит от настроения</label>
+                    <label><input type="radio" name="q6" value="hetero"> Предпочитаю классику</label>
+                </div>
+            </div>
+            <div class="question">
+                <p>7. Что вы думаете о тусовках и вечеринках?</p>
+                <div class="answers">
+                    <label><input type="radio" name="q7" value="gay"> Обожаю веселиться</label>
+                    <label><input type="radio" name="q7" value="neutral"> Иногда посещаю</label>
+                    <label><input type="radio" name="q7" value="hetero"> Не люблю тусовки</label>
+                </div>
+            </div>
+            <div class="question">
+                <p>8. Восхищают ли вас люди одного с вами пола?</p>
+                <div class="answers">
+                    <label><input type="radio" name="q8" value="gay"> Да, очень</label>
+                    <label><input type="radio" name="q8" value="neutral"> Иногда</label>
+                    <label><input type="radio" name="q8" value="hetero"> Нет</label>
+                </div>
+            </div>
+            <div class="question">
+                <p>9. Нравится ли вам заботиться о внешности?</p>
+                <div class="answers">
+                    <label><input type="radio" name="q9" value="gay"> Очень важно</label>
+                    <label><input type="radio" name="q9" value="neutral"> Нейтрально</label>
+                    <label><input type="radio" name="q9" value="hetero"> Не уделяю внимания</label>
+                </div>
+            </div>
+            <div class="question">
+                <p>10. Как часто вы ощущаете романтическое влечение к людям того же пола?</p>
+                <div class="answers">
+                    <label><input type="radio" name="q10" value="gay"> Часто</label>
+                    <label><input type="radio" name="q10" value="neutral"> Иногда</label>
+                    <label><input type="radio" name="q10" value="hetero"> Никогда</label>
+                </div>
+            </div>
+            <button type="button" onclick="calculateResults()">Показать результат</button>
+        </form>
+        <div id="result">
+            <h2>Ваш результат:</h2>
+            <canvas id="resultChart" width="400" height="400"></canvas>
         </div>
-        <div class="question">
-            <label>2. Какие фильмы вам нравятся больше?</label>
-            <input type="radio" name="q2" value="0" required> Романтические с девушками
-            <input type="radio" name="q2" value="1"> Универсальные, оба варианта
-            <input type="radio" name="q2" value="2"> Романтические с парнями
-        </div>
-        <!-- Добавьте еще 8 вопросов аналогично, с вариантами 0, 1, 2 -->
-
-        <button type="submit" class="submit-btn">Показать результат</button>
-    </form>
-
-    <div id="result">
-        <h2>Результат</h2>
-        <p>Ваш процент приверженности к разным ориентациям:</p>
-        <canvas id="resultChart" width="400" height="400"></canvas>
-        <p id="percentageText"></p>
     </div>
-</div>
 
-<script>
-    document.getElementById("quizForm").addEventListener("submit", function(event) {
-        event.preventDefault(); // Чтобы форма не перезагружала страницу
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        function calculateResults() {
+            const form = document.getElementById('quizForm');
+            const answers = new FormData(form);
+            let scores = { gay: 0, hetero: 0, neutral: 0 };
 
-        // Считываем ответы
-        const formData = new FormData(event.target);
-        let scores = { gay: 0, straight: 0, bisexual: 0 };
+            answers.forEach((value) => {
+                scores[value]++;
+            });
 
-        formData.forEach((value, key) => {
-            // Каждый вопрос оценивается по шкале от 0 до 2, где 0 - более гетеро, 2 - более гей
-            switch (key) {
-                case 'q1':
-                    if (value == '2') scores.straight++; // Пример для расчета баллов
-                    break;
-                case 'q2':
-                    if (value == '0') scores.gay++; 
-                    break;
-                // Добавь остальные вопросы аналогично
-            }
-        });
+            const total = scores.gay + scores.hetero + scores.neutral;
 
-        // Подсчитываем результаты в процентах
-        const totalQuestions = 10;
-        const totalScore = scores.gay + scores.straight + scores.bisexual;
-        const gayPercentage = (scores.gay / totalQuestions) * 100;
-        const straightPercentage = (scores.straight / totalQuestions) * 100;
-        const bisexualPercentage = (scores.bisexual / totalQuestions) * 100;
+            const results = {
+                gay: Math.round((scores.gay / total) * 100),
+                hetero: Math.round((scores.hetero / total) * 100),
+                neutral: Math.round((scores.neutral / total) * 100)
+            };
 
-        // Показываем результат
-        document.getElementById("result").style.display = "block";
-        document.getElementById("percentageText").innerText = 
-            `Гей: ${gayPercentage.toFixed(2)}%, Лесбиянка: ${bisexualPercentage.toFixed(2)}%, Гетеро: ${straightPercentage.toFixed(2)}%`;
+            displayResults(results);
+        }
 
-        // Построение круговой диаграммы
-        const ctx = document.getElementById('resultChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: ['Гей', 'Лесбиянка', 'Гетеро'],
-                datasets: [{
-                    data: [gayPercentage, bisexualPercentage, straightPercentage],
-                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-                    hoverOffset: 4
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(tooltipItem) {
-                                return `${tooltipItem.label}: ${tooltipItem.raw.toFixed(2)}%`;
-                            }
+        function displayResults(results) {
+            const ctx = document.getElementById('resultChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Гей', 'Гетеро', 'Нейтрально'],
+                    datasets: [{
+                        data: [results.gay, results.hetero, results.neutral],
+                        backgroundColor: ['#ff6384', '#36a2eb', '#cc65fe'],
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
                         }
                     }
                 }
-            }
-        });
-    });
-</script>
-
+            });
+        }
+    </script>
 </body>
 </html>
